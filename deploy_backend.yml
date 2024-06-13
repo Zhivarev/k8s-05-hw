@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multitool
+  namespace: netology
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multitool
+  template:
+    metadata:
+      labels:
+        app: multitool
+    spec:
+      containers:
+        - image: wbitt/network-multitool
+          name: multitool
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: srv-multitool
+  namespace: netology
+spec:
+  ports:
+    - name: multitool
+      port: 80
+  selector:
+    app: multitool

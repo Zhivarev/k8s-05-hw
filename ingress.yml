@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  namespace: netology
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: ingress.flid.ru
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: srv-nginx
+                port:
+                  name: nginx
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: srv-multitool
+                port:
+                  name: multitool
